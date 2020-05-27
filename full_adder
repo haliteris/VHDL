@@ -1,0 +1,31 @@
+// Res.Asst. Halit ERİŞ
+// Please contact for further applications.
+// A basic full adder circuit can be built by using two half adder circuits.
+// Half adder circuit can be received from https://github.com/haliteris/VHDL/blob/master/half_adder, 
+// Then you can can use the sub circuits as a component.
+
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+
+ENTITY full_adder IS
+      PORT (    K                : IN     STD_LOGIC;
+                L                : IN     STD_LOGIC;
+                fa_carry_0       : IN     STD_LOGIC;
+                fa_carry_out     : OUT    STD_LOGIC;
+                fa_sum           : OUT    STD_LOGIC);
+END full_adder;
+
+ARCHITECTURE Behavioral OF full_adder IS
+      COMPONENT ha
+             PORT( A           : IN  STD_LOGIC;
+                   B           : IN  STD_LOGIC;
+                   ha_carry    : OUT STD_LOGIC;
+                   ha_sum      : OUT STD_LOGIC
+						 );
+      END COMPONENT;	
+      SIGNAL carry1,carry2,sum1:STD_LOGIC;
+BEGIN
+      Half_Adder_1: half_adder PORT MAP( A => K, B => L, ha_sum => sum1 , ha_carry => carry1);
+      Half_Adder_2: half_adder PORT MAP( A => sum1, B => fa_carry_0, ha_sum => fa_sum , ha_carry => carry2);
+      fa_carry_out <=carry1 OR carry2;
+END Behavioral;
