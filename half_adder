@@ -1,0 +1,18 @@
+LIBRARY ieee;
+USE ieee.std_logic_1164.all;
+USE ieee.numeric_std.all;
+ 
+ENTITY half_adder IS
+  PORT (
+    A        : IN STD_LOGIC;
+    B        : IN STD_LOGIC;
+    ha_carry   : OUT STD_LOGIC;
+    ha_sum : OUT STD_LOGIC
+    );
+END half_adder;
+ 
+ARCHITECTURE arc_half_adder OF half_adder IS
+BEGIN
+  ha_sum   <= A XOR B;
+  ha_carry <= A AND B;
+END arc_half_adder;
